@@ -9,6 +9,8 @@ module.exports = function () {
     var extract = tar.extract()
 
     extract.on('entry', function (header, stream, nextEntry) {
+      if (header.type !== 'file') return nextEntry()
+
       this.push(new gutil.File({
         contents: stream,
         path: path.relative('.', header.name)
