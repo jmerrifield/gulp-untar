@@ -1,6 +1,7 @@
 # gulp-untar
 
 [![NPM version](https://badge.fury.io/js/gulp-untar.svg)](http://badge.fury.io/js/gulp-untar)
+[![Build Status](https://travis-ci.org/jmerrifield/gulp-untar.svg?branch=master)](https://travis-ci.org/jmerrifield/gulp-untar)
 
 Extract tarballs in your [gulp](http://gulpjs.com) build pipeline
 
