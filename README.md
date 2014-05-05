@@ -23,17 +23,19 @@ $ npm install --save-dev gulp-untar
   })
 ```
 
-In combination with [gulp-download](https://github.com/Metrime/gulp-download)
-and [gulp-gunzip](https://github.com/jmerrifield/gulp-gunzip):
+In combination with [gulp-gunzip](https://github.com/jmerrifield/gulp-gunzip) and
+[vinyl-source-stream](https://github.com/hughsk/vinyl-source-stream):
 
 ```js
 var gulp = require('gulp')
-var download = require('gulp-download')
+var request = require('request')
+var source = require('vinyl-source-stream')
 var gunzip = require('gulp-gunzip')
 var untar = require('gulp-untar')
 
 gulp.task('default', function () {
-  return download('http://example.org/some-file.tar.gz')
+  return request('http://example.org/some-file.tar.gz')
+  .pipe(source('some-file.tar.gz'))
   .pipe(gunzip())
   .pipe(untar())
   .pipe(gulp.dest('output'))
