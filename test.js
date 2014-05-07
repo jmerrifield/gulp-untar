@@ -1,4 +1,3 @@
-var es = require('event-stream')
 var gutil = require('gulp-util')
 var assert = require('assert')
 var fs = require('fs')
@@ -11,23 +10,20 @@ describe('gulp-untar', function () {
     var files = []
 
     return through.obj(function (file, enc, callback) {
-      file.contents.pipe(es.wait(function (err, data) {
-        if (err) return done(err)
-        file.stringContents = data
-        files.push(file)
-
-        callback()
-      }))
+      files.push(file)
+      callback()
     }, function () {
       assert.equal(files.length, 2)
 
       var file1 = _.find(files, {path: 'file1.txt'})
       assert.ok(file1, 'No file found named "file1.txt"')
-      assert.equal('File 1\n', file1.stringContents)
+      assert.ok(file1.isBuffer(), 'Expected buffer')
+      assert.equal('File 1\n', file1.contents.toString())
 
       var file2 = _.find(files, {path: 'dir1/file2.txt'})
       assert.ok(file2, 'No file found named "dir1/file2.txt"')
-      assert.equal('File 2\n', file2.stringContents)
+      assert.ok(file2.isBuffer(), 'Expected buffer')
+      assert.equal('File 2\n', file2.contents.toString())
 
       done()
     })

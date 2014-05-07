@@ -5,6 +5,9 @@
 
 Extract tarballs in your [gulp](http://gulpjs.com) build pipeline
 
+Accepts source files with either stream or Buffer contents. Outputs files with
+Buffer contents.
+
 ## Install
 
 ```bash
