@@ -1,38 +1,37 @@
 var through = require('through2')
-var tar = require('tar-stream')
+var parse = require('tar').Parse
 var gutil = require('gulp-util')
 var path = require('path')
 var streamifier = require('streamifier')
 
 module.exports = function () {
   return through.obj(function (file, enc, callback) {
-    var extract = tar.extract()
-
-    extract.on('entry', function (header, stream, nextEntry) {
-      if (header.type !== 'file') return nextEntry()
-
-      this.push(new gutil.File({
-        contents: stream,
-        path: path.relative('.', header.name)
-      }))
-
-      nextEntry()
-    }.bind(this))
-
-    extract.on('finish', function () {
-      callback()
-    })
+    var contentsStream
 
     if (file.isNull()) {
-      this.push(file)
+      return this.push(file)
     }
 
     if (file.isStream()) {
-      file.contents.pipe(extract)
+      contentsStream = file.contents
     }
 
     if (file.isBuffer()) {
-      streamifier.createReadStream(file.contents).pipe(extract)
+      contentsStream = streamifier.createReadStream(file.contents)
     }
+
+    contentsStream
+    .pipe(parse())
+    .on('entry', function (entry) {
+      if (entry.props.type !== '0') return
+
+      this.push(new gutil.File({
+        contents: entry,
+        path: path.relative('.', entry.props.path)
+      }))
+    }.bind(this))
+    .on('end', function () {
+      callback()
+    })
   })
 }

@@ -5,14 +5,13 @@
   "main": "index.js",
   "dependencies": {
     "gulp-util": "~2.2.14",
-    "tar-stream": "~0.3.3",
     "through2": "~0.4.1",
-    "streamifier": "~0.1.0"
+    "streamifier": "~0.1.0",
+    "tar": "~0.1.19"
   },
   "devDependencies": {
     "event-stream": "~3.1.5",
     "mocha": "~1.18.2",
-    "async": "~0.8.0",
     "lodash": "~2.4.1",
     "jshint": "~2.5.0"
   },
