@@ -39,7 +39,9 @@ module.exports = function () {
 
         this.push(new gutil.File({
           contents: new Buffer(data),
-          path: path.relative('.', entry.props.path)
+          path: path.normalize(path.dirname(file.path) + '/' + entry.props.path),
+          base: file.base,
+          cwd: file.cwd
         }))
       }.bind(this)))
     }.bind(this))
