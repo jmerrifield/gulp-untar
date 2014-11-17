@@ -1,8 +1,5 @@
 # gulp-untar
 
-[![NPM version](https://badge.fury.io/js/gulp-untar.svg)](http://badge.fury.io/js/gulp-untar)
-[![Build Status](https://travis-ci.org/jmerrifield/gulp-untar.svg?branch=master)](https://travis-ci.org/jmerrifield/gulp-untar)
-
 Extract tarballs in your [gulp](http://gulpjs.com) build pipeline
 
 Accepts source files with either stream or Buffer contents. Outputs files with
@@ -11,13 +8,13 @@ Buffer contents.
 ## Install
 
 ```bash
-$ npm install --save-dev gulp-untar
+$ npm install --save-dev gulp-untar2
 ```
 ## Usage
 
 ```js
   var gulp = require('gulp')
-  var untar = require('gulp-untar')
+  var untar = require('gulp-untar2')
 
   gulp.task('extract-archives', function () {
     return gulp.src('./archive/*.tar')
@@ -34,7 +31,7 @@ var gulp = require('gulp')
 var request = require('request')
 var source = require('vinyl-source-stream')
 var gunzip = require('gulp-gunzip')
-var untar = require('gulp-untar')
+var untar = require('gulp-untar2')
 
 gulp.task('default', function () {
   return request('http://example.org/some-file.tar.gz')
