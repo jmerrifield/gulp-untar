@@ -15,13 +15,13 @@ describe('gulp-untar', function () {
     }, function () {
       assert.equal(files.length, 2)
 
-      var file1 = _.find(files, {path: 'file1.txt'})
-      assert.ok(file1, 'No file found named "file1.txt"')
+      var file1 = _.find(files, {path: 'fixtures/file1.txt', base: './fixtures', cwd: '.'})
+      assert.ok(file1, 'No file found named "fixtures/file1.txt"')
       assert.ok(file1.isBuffer(), 'Expected buffer')
       assert.equal('File 1\n', file1.contents.toString())
 
-      var file2 = _.find(files, {path: 'dir1/file2.txt'})
-      assert.ok(file2, 'No file found named "dir1/file2.txt"')
+      var file2 = _.find(files, {path: 'fixtures/dir1/file2.txt', base: './fixtures', cwd: '.'})
+      assert.ok(file2, 'No file found named "fixtures/dir1/file2.txt"')
       assert.ok(file2.isBuffer(), 'Expected buffer')
       assert.equal('File 2\n', file2.contents.toString())
 
@@ -37,6 +37,8 @@ describe('gulp-untar', function () {
 
       stream.write(new gutil.File({
         path: './fixtures/test.tar',
+        base: './fixtures',
+        cwd: '.',
         contents: fs.createReadStream('./fixtures/test.tar')
       }))
 
@@ -53,6 +55,8 @@ describe('gulp-untar', function () {
 
       stream.write(new gutil.File({
         path: './fixtures/test.tar',
+        base: './fixtures',
+        cwd: '.',
         contents: fs.readFileSync('./fixtures/test.tar')
       }))
 
@@ -71,6 +75,8 @@ describe('gulp-untar', function () {
 
       stream.write(new gutil.File({
         path: './fixtures/test.tar',
+        base: './fixtures',
+        cwd: '.',
         contents: null
       }))
     })
