@@ -34,7 +34,7 @@ module.exports = function () {
       // streams to consumers means that we're depending on them consuming
       // each stream in sequence.
 
-      entry.pipe(es.wait(function (err, data) {
+      entry.pipe(wait(function (err, data) {
         if (err) return this.emit('error', err)
 
         this.push(new gutil.File({
@@ -49,4 +49,17 @@ module.exports = function () {
       callback()
     })
   })
+}
+
+function wait(callback) {
+  var buffers = []
+  return es.through(function (data) {
+      buffers.push(data);
+    },
+    function () {
+      var body = Buffer.concat(buffers)
+      this.emit('data', body)
+      this.emit('end')
+      if(callback) callback(null, body)
+    })
 }

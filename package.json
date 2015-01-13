@@ -1,9 +1,10 @@
 {
-  "name": "gulp-untar",
-  "version": "0.0.3",
+  "name": "gulp-untar2",
+  "version": "0.0.6",
   "description": "Extract tarballs in your gulp build pipeline",
   "main": "index.js",
   "dependencies": {
+    "event-stream": "~3.1.5",
     "gulp-util": "~2.2.14",
     "through2": "~0.4.1",
     "streamifier": "~0.1.0",
@@ -22,7 +23,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jmerrifield/gulp-untar"
+    "url": "https://github.com/sorrycc/gulp-untar"
   },
   "keywords": [
     "gulpplugin",
@@ -30,6 +31,6 @@
     "tar"
   ],
   "bugs": {
-    "url": "https://github.com/jmerrifield/gulp-untar/issues"
+    "url": "https://github.com/sorrycc/gulp-untar/issues"
   }
 }
