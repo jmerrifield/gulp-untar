@@ -31,5 +31,8 @@
   ],
   "bugs": {
     "url": "https://github.com/jmerrifield/gulp-untar/issues"
-  }
+  },
+  "files": [
+    "index.js"
+  ]
 }
