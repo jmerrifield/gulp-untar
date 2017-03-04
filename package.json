@@ -16,7 +16,8 @@
     "jshint": "~2.5.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "jshint ."
   },
   "author": "Jon Merrifield",
   "license": "MIT",
