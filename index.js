@@ -5,7 +5,7 @@ var path = require('path')
 var streamifier = require('streamifier')
 var es = require('event-stream')
 
-module.exports = function () {
+module.exports = function (baseDir) {
   return through.obj(function (file, enc, callback) {
     var contentsStream
 
@@ -40,7 +40,7 @@ module.exports = function () {
         this.push(new gutil.File({
           contents: new Buffer(data),
           path: path.normalize(path.dirname(file.path) + '/' + entry.props.path),
-          base: file.base,
+          base: path.resolve(baseDir || file.base),
           cwd: file.cwd
         }))
       }.bind(this)))
