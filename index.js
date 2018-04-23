@@ -41,7 +41,10 @@ module.exports = function () {
           contents: new Buffer(data),
           path: path.normalize(path.dirname(file.path) + '/' + entry.props.path),
           base: file.base,
-          cwd: file.cwd
+          cwd: file.cwd,
+          stat: {
+            mode: entry.props.mode,
+          }
         }))
       }.bind(this)))
     }.bind(this))

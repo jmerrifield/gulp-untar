@@ -29,6 +29,41 @@ describe('gulp-untar', function () {
     })
   }
 
+  function assertPermissions(done) {
+    var files = []
+
+    return through.obj(function (file, enc, callback) {
+      files.push(file)
+      callback()
+    }, function () {
+      assert.equal(files.length, 1)
+
+      var file1 = _.find(files, {path: 'fixtures/my_script.sh', base: './fixtures', cwd: '.'})
+      assert.ok(file1, 'No file found named "my_script.sh"')
+      assert.ok(file1.isBuffer(), 'Expected buffer')
+      assert.equal(file1.stat.mode, 0o755)
+      // assert.equal('File 1\n', file1.contents.toString())
+
+      done()
+    })
+  }
+
+  context('with permissions', function() {
+    it('should untar files', function(done) {
+      var stream = untar()
+      stream.pipe(assertPermissions(done))
+
+      stream.write(new Vinyl({
+        path: './fixtures/permissions.tar',
+        base: './fixtures',
+        cwd: '.',
+        contents: fs.createReadStream('./fixtures/permissions.tar'),
+      }));
+
+      stream.end();
+    });
+  });
+
   context('in streaming mode', function () {
     it('should untar files', function (done) {
       var stream = untar()
