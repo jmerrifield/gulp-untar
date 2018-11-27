@@ -4,7 +4,7 @@
   "description": "Extract tarballs in your gulp build pipeline",
   "main": "index.js",
   "dependencies": {
-    "event-stream": "~3.3.4",
+    "event-stream": "3.3.4",
     "streamifier": "~0.1.1",
     "tar": "^2.2.1",
     "through2": "~2.0.3",
